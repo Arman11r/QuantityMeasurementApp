@@ -5,27 +5,32 @@ public class FeetMeasurement {
    
     public enum Unit {
 
-        FEET(12.0),
-        INCH(1.0);
+        INCH(1.0),
+        FEET(12.0),                
+        YARDS(36.0),               
+        CENTIMETERS(0.393701);      
 
-        private final double conversionFactor;
+        private final double conversionFactorToInch;
 
-        Unit(double conversionFactor) {
-            this.conversionFactor = conversionFactor;
+        Unit(double conversionFactorToInch) {
+            this.conversionFactorToInch = conversionFactorToInch;
         }
 
         public double toBase(double value) {
-            return value * conversionFactor;
+            return value * conversionFactorToInch;
         }
     }
 
-   
+    
     public static class Quantity {
 
         private final double value;
         private final Unit unit;
 
         public Quantity(double value, Unit unit) {
+            if (unit == null) {
+                throw new IllegalArgumentException("Unit cannot be null");
+            }
             this.value = value;
             this.unit = unit;
         }
@@ -33,17 +38,14 @@ public class FeetMeasurement {
         @Override
         public boolean equals(Object obj) {
 
-            // Reflexive
             if (this == obj)
                 return true;
 
-            // Null + Type check
             if (obj == null || getClass() != obj.getClass())
                 return false;
 
             Quantity other = (Quantity) obj;
 
-            // Convert both to base (inch) before comparing
             double thisInBase = this.unit.toBase(this.value);
             double otherInBase = other.unit.toBase(other.value);
 
@@ -53,6 +55,11 @@ public class FeetMeasurement {
         @Override
         public int hashCode() {
             return Double.hashCode(unit.toBase(value));
+        }
+
+        @Override
+        public String toString() {
+            return "Quantity(" + value + ", " + unit + ")";
         }
     }
 }

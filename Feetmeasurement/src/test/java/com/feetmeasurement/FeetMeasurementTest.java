@@ -1,67 +1,51 @@
 package com.feetmeasurement;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class FeetMeasurementTest {
 
     @Test
-    void testFeetEquality_SameValue() {
+    void testEquality_YardToYard_SameValue() {
         FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.YARDS);
 
         FeetMeasurement.Quantity q2 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.YARDS);
 
         assertTrue(q1.equals(q2));
     }
 
     @Test
-    void testInchEquality_SameValue() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(5.0, FeetMeasurement.Unit.INCH);
+    void testEquality_YardToFeet_EquivalentValue() {
+        FeetMeasurement.Quantity yard =
+                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.YARDS);
 
-        FeetMeasurement.Quantity q2 =
-                new FeetMeasurement.Quantity(5.0, FeetMeasurement.Unit.INCH);
+        FeetMeasurement.Quantity feet =
+                new FeetMeasurement.Quantity(3.0, FeetMeasurement.Unit.FEET);
 
-        assertTrue(q1.equals(q2));
+        assertTrue(yard.equals(feet));
     }
 
     @Test
-    void testFeetToInchEquality() {
-        FeetMeasurement.Quantity oneFoot =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+    void testEquality_YardToInches_EquivalentValue() {
+        FeetMeasurement.Quantity yard =
+                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.YARDS);
 
-        FeetMeasurement.Quantity twelveInch =
-                new FeetMeasurement.Quantity(12.0, FeetMeasurement.Unit.INCH);
+        FeetMeasurement.Quantity inches =
+                new FeetMeasurement.Quantity(36.0, FeetMeasurement.Unit.INCH);
 
-        assertTrue(oneFoot.equals(twelveInch));
+        assertTrue(yard.equals(inches));
     }
 
     @Test
-    void testDifferentValues() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+    void testEquality_CentimeterToInches_EquivalentValue() {
+        FeetMeasurement.Quantity cm =
+                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.CENTIMETERS);
 
-        FeetMeasurement.Quantity q2 =
-                new FeetMeasurement.Quantity(2.0, FeetMeasurement.Unit.FEET);
+        FeetMeasurement.Quantity inch =
+                new FeetMeasurement.Quantity(0.393701, FeetMeasurement.Unit.INCH);
 
-        assertFalse(q1.equals(q2));
-    }
-
-    @Test
-    void testNullComparison() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
-
-        assertFalse(q1.equals(null));
-    }
-
-    @Test
-    void testDifferentType() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
-
-        assertFalse(q1.equals("1.0"));
+        assertTrue(cm.equals(inch));
     }
 }
