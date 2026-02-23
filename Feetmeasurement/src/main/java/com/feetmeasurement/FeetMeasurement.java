@@ -33,17 +33,14 @@ public class FeetMeasurement {
         @Override
         public boolean equals(Object obj) {
 
-            // Reflexive
             if (this == obj)
                 return true;
 
-            // Null + Type check
             if (obj == null || getClass() != obj.getClass())
                 return false;
 
             Quantity other = (Quantity) obj;
 
-            // Convert both to base (inch) before comparing
             double thisInBase = this.unit.toBase(this.value);
             double otherInBase = other.unit.toBase(other.value);
 
