@@ -2,9 +2,7 @@ package com.feetmeasurement;
 
 public class FeetMeasurement {
 
-    /*
-     * ===== FEET CLASS =====
-     */
+    
     public static class Feet {
 
         private final double value;
@@ -36,9 +34,7 @@ public class FeetMeasurement {
         }
     }
 
-    /*
-     * ===== INCH CLASS =====
-     */
+    
     public static class Inch {
 
         private final double value;
@@ -70,9 +66,7 @@ public class FeetMeasurement {
         }
     }
 
-    /*
-     * ===== STATIC METHODS (UC2 Requirement) =====
-     */
+  
 
     public static boolean checkFeetEquality(double value1, double value2) {
         Feet f1 = new Feet(value1);
@@ -86,9 +80,7 @@ public class FeetMeasurement {
         return i1.equals(i2);
     }
 
-    /*
-     * ===== MAIN METHOD =====
-     */
+  
 
     public static void main(String[] args) {
 
