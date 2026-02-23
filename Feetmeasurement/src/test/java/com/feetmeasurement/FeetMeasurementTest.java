@@ -7,44 +7,56 @@ class FeetMeasurementTest {
 
     @Test
     void testEquality_YardToYard_SameValue() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.YARDS);
 
-        FeetMeasurement.Quantity q2 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.YARDS);
+        FeetMeasurement.Length l1 =
+                new FeetMeasurement.Length(1.0,
+                        FeetMeasurement.Length.LengthUnit.YARDS);
 
-        assertTrue(q1.equals(q2));
+        FeetMeasurement.Length l2 =
+                new FeetMeasurement.Length(1.0,
+                        FeetMeasurement.Length.LengthUnit.YARDS);
+
+        assertTrue(l1.equals(l2));
     }
 
     @Test
     void testEquality_YardToFeet_EquivalentValue() {
-        FeetMeasurement.Quantity yard =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.YARDS);
 
-        FeetMeasurement.Quantity feet =
-                new FeetMeasurement.Quantity(3.0, FeetMeasurement.Unit.FEET);
+        FeetMeasurement.Length yard =
+                new FeetMeasurement.Length(1.0,
+                        FeetMeasurement.Length.LengthUnit.YARDS);
+
+        FeetMeasurement.Length feet =
+                new FeetMeasurement.Length(3.0,
+                        FeetMeasurement.Length.LengthUnit.FEET);
 
         assertTrue(yard.equals(feet));
     }
 
     @Test
     void testEquality_YardToInches_EquivalentValue() {
-        FeetMeasurement.Quantity yard =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.YARDS);
 
-        FeetMeasurement.Quantity inches =
-                new FeetMeasurement.Quantity(36.0, FeetMeasurement.Unit.INCH);
+        FeetMeasurement.Length yard =
+                new FeetMeasurement.Length(1.0,
+                        FeetMeasurement.Length.LengthUnit.YARDS);
+
+        FeetMeasurement.Length inches =
+                new FeetMeasurement.Length(36.0,
+                        FeetMeasurement.Length.LengthUnit.INCHES);
 
         assertTrue(yard.equals(inches));
     }
 
     @Test
     void testEquality_CentimeterToInches_EquivalentValue() {
-        FeetMeasurement.Quantity cm =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.CENTIMETERS);
 
-        FeetMeasurement.Quantity inch =
-                new FeetMeasurement.Quantity(0.393701, FeetMeasurement.Unit.INCH);
+        FeetMeasurement.Length cm =
+                new FeetMeasurement.Length(1.0,
+                        FeetMeasurement.Length.LengthUnit.CENTIMETERS);
+
+        FeetMeasurement.Length inch =
+                new FeetMeasurement.Length(0.393701,
+                        FeetMeasurement.Length.LengthUnit.INCHES);
 
         assertTrue(cm.equals(inch));
     }
