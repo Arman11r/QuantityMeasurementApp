@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class QuantityMeasurementAppTest {
+class FeetMeasurementTest {
 
     private static final double EPSILON = 1e-6;
 
@@ -19,6 +19,7 @@ class QuantityMeasurementAppTest {
         Length result = l1.add(l2, LengthUnit.FEET);
 
         assertEquals(2.0, result.getValue(), EPSILON);
+        assertEquals(LengthUnit.FEET, result.getUnit());
     }
 
     @Test
@@ -30,6 +31,7 @@ class QuantityMeasurementAppTest {
         Length result = l1.add(l2, LengthUnit.INCHES);
 
         assertEquals(24.0, result.getValue(), EPSILON);
+        assertEquals(LengthUnit.INCHES, result.getUnit());
     }
 
     @Test
@@ -41,6 +43,7 @@ class QuantityMeasurementAppTest {
         Length result = l1.add(l2, LengthUnit.YARDS);
 
         assertEquals(0.666666, result.getValue(), 1e-3);
+        assertEquals(LengthUnit.YARDS, result.getUnit());
     }
 
     @Test
@@ -52,6 +55,7 @@ class QuantityMeasurementAppTest {
         Length result = l1.add(l2, LengthUnit.CENTIMETERS);
 
         assertEquals(5.08, result.getValue(), 1e-2);
+        assertEquals(LengthUnit.CENTIMETERS, result.getUnit());
     }
 
     @Test
@@ -64,6 +68,7 @@ class QuantityMeasurementAppTest {
         Length result2 = l2.add(l1, LengthUnit.YARDS);
 
         assertEquals(result1.getValue(), result2.getValue(), EPSILON);
+        assertEquals(result1.getUnit(), result2.getUnit());
     }
 
     @Test
@@ -85,6 +90,7 @@ class QuantityMeasurementAppTest {
         Length result = l1.add(l2, LengthUnit.YARDS);
 
         assertEquals(1.666666, result.getValue(), 1e-3);
+        assertEquals(LengthUnit.YARDS, result.getUnit());
     }
 
     @Test
@@ -96,5 +102,6 @@ class QuantityMeasurementAppTest {
         Length result = l1.add(l2, LengthUnit.INCHES);
 
         assertEquals(36.0, result.getValue(), EPSILON);
+        assertEquals(LengthUnit.INCHES, result.getUnit());
     }
 }
