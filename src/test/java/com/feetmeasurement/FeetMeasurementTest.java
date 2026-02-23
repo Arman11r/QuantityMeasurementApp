@@ -12,8 +12,8 @@ class FeetMeasurementTest {
         double result = FeetMeasurement.convert(
                 1.0,
                 FeetMeasurement.Unit.FEET,
-                FeetMeasurement.Unit.INCH);
-
+                FeetMeasurement.Unit.INCH
+        );
         assertEquals(12.0, result, EPSILON);
     }
 
@@ -22,8 +22,8 @@ class FeetMeasurementTest {
         double result = FeetMeasurement.convert(
                 3.0,
                 FeetMeasurement.Unit.YARDS,
-                FeetMeasurement.Unit.FEET);
-
+                FeetMeasurement.Unit.FEET
+        );
         assertEquals(9.0, result, EPSILON);
     }
 
@@ -32,8 +32,8 @@ class FeetMeasurementTest {
         double result = FeetMeasurement.convert(
                 2.54,
                 FeetMeasurement.Unit.CENTIMETERS,
-                FeetMeasurement.Unit.INCH);
-
+                FeetMeasurement.Unit.INCH
+        );
         assertEquals(1.0, result, EPSILON);
     }
 
@@ -42,8 +42,8 @@ class FeetMeasurementTest {
         double result = FeetMeasurement.convert(
                 0.0,
                 FeetMeasurement.Unit.FEET,
-                FeetMeasurement.Unit.INCH);
-
+                FeetMeasurement.Unit.INCH
+        );
         assertEquals(0.0, result, EPSILON);
     }
 
@@ -52,39 +52,60 @@ class FeetMeasurementTest {
         double result = FeetMeasurement.convert(
                 -1.0,
                 FeetMeasurement.Unit.FEET,
-                FeetMeasurement.Unit.INCH);
-
+                FeetMeasurement.Unit.INCH
+        );
         assertEquals(-12.0, result, EPSILON);
     }
 
     @Test
     void testConversion_RoundTrip() {
-        double value = 5.0;
+        double original = 5.0;
 
-        double toInch = FeetMeasurement.convert(
-                value,
+        double inches = FeetMeasurement.convert(
+                original,
                 FeetMeasurement.Unit.FEET,
-                FeetMeasurement.Unit.INCH);
+                FeetMeasurement.Unit.INCH
+        );
 
         double backToFeet = FeetMeasurement.convert(
-                toInch,
+                inches,
                 FeetMeasurement.Unit.INCH,
-                FeetMeasurement.Unit.FEET);
+                FeetMeasurement.Unit.FEET
+        );
 
-        assertEquals(value, backToFeet, EPSILON);
+        assertEquals(original, backToFeet, EPSILON);
     }
 
     @Test
-    void testConversion_InvalidUnit_Throws() {
+    void testConversion_NullSource_Throws() {
         assertThrows(IllegalArgumentException.class, () ->
-                FeetMeasurement.convert(1.0, null, FeetMeasurement.Unit.FEET));
+                FeetMeasurement.convert(
+                        1.0,
+                        null,
+                        FeetMeasurement.Unit.FEET
+                )
+        );
+    }
+
+    @Test
+    void testConversion_NullTarget_Throws() {
+        assertThrows(IllegalArgumentException.class, () ->
+                FeetMeasurement.convert(
+                        1.0,
+                        FeetMeasurement.Unit.FEET,
+                        null
+                )
+        );
     }
 
     @Test
     void testConversion_NaN_Throws() {
         assertThrows(IllegalArgumentException.class, () ->
-                FeetMeasurement.convert(Double.NaN,
+                FeetMeasurement.convert(
+                        Double.NaN,
                         FeetMeasurement.Unit.FEET,
-                        FeetMeasurement.Unit.INCH));
+                        FeetMeasurement.Unit.INCH
+                )
+        );
     }
 }

@@ -101,4 +101,17 @@ public class FeetMeasurement {
         double base = source.toBase(value);
         return target.fromBase(base);
     }
+
+    public static void main(String[] args) {
+
+        Quantity q1 = new Quantity(3.0, Unit.FEET);
+        Quantity converted = q1.convertTo(Unit.INCH);
+
+        System.out.println("3 feet in inches = " + converted.getValue());
+
+        Quantity q2 = new Quantity(100.0, Unit.CENTIMETERS);
+        Quantity q3 = new Quantity(39.3701, Unit.INCH);
+
+        System.out.println("Are equal? " + q2.equals(q3));
+    }
 }
