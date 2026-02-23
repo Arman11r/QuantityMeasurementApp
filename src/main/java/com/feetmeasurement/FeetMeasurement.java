@@ -124,4 +124,15 @@ public class FeetMeasurement {
 
         return q1.add(q2);
     }
+
+    public static void main(String[] args) {
+
+        Quantity q1 = new Quantity(1.0, Unit.FEET);
+        Quantity q2 = new Quantity(12.0, Unit.INCH);
+
+        Quantity result = q1.add(q2);
+
+        System.out.println("Input: add(1.0 FEET, 12.0 INCH)");
+        System.out.println("Output: " + result);
+    }
 }

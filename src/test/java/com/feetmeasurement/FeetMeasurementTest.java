@@ -17,6 +17,7 @@ class FeetMeasurementTest {
         FeetMeasurement.Quantity result = q1.add(q2);
 
         assertEquals(3.0, result.getValue(), EPSILON);
+        assertEquals(FeetMeasurement.Unit.FEET, result.getUnit());
     }
 
     @Test
@@ -29,6 +30,7 @@ class FeetMeasurementTest {
         FeetMeasurement.Quantity result = q1.add(q2);
 
         assertEquals(2.0, result.getValue(), EPSILON);
+        assertEquals(FeetMeasurement.Unit.FEET, result.getUnit());
     }
 
     @Test
@@ -41,6 +43,7 @@ class FeetMeasurementTest {
         FeetMeasurement.Quantity result = q1.add(q2);
 
         assertEquals(24.0, result.getValue(), EPSILON);
+        assertEquals(FeetMeasurement.Unit.INCH, result.getUnit());
     }
 
     @Test
@@ -53,6 +56,7 @@ class FeetMeasurementTest {
         FeetMeasurement.Quantity result = q1.add(q2);
 
         assertEquals(2.0, result.getValue(), EPSILON);
+        assertEquals(FeetMeasurement.Unit.YARDS, result.getUnit());
     }
 
     @Test
@@ -80,7 +84,7 @@ class FeetMeasurementTest {
     }
 
     @Test
-    void testAddition_Commutativity() {
+    void testAddition_Commutativity_BaseEquality() {
         FeetMeasurement.Quantity q1 =
                 new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
         FeetMeasurement.Quantity q2 =
@@ -89,9 +93,13 @@ class FeetMeasurementTest {
         FeetMeasurement.Quantity result1 = q1.add(q2);
         FeetMeasurement.Quantity result2 = q2.add(q1);
 
-        assertEquals(result1.getValue() * 12.0,
-                     result2.getValue(),
-                     EPSILON);
+        double result1Base =
+                result1.getUnit().toBase(result1.getValue());
+
+        double result2Base =
+                result2.getUnit().toBase(result2.getValue());
+
+        assertEquals(result1Base, result2Base, EPSILON);
     }
 
     @Test
@@ -99,6 +107,7 @@ class FeetMeasurementTest {
         FeetMeasurement.Quantity q1 =
                 new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
 
-        assertThrows(IllegalArgumentException.class, () -> q1.add(null));
+        assertThrows(IllegalArgumentException.class,
+                () -> q1.add(null));
     }
 }
