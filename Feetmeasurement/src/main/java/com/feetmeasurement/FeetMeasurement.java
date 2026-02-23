@@ -1,11 +1,7 @@
 package com.feetmeasurement;
 
-
 public class FeetMeasurement {
 
-    /*
-     * Inner Class Representing Feet Measurement
-     */
     public static class Feet {
 
         private final double value;
@@ -21,21 +17,17 @@ public class FeetMeasurement {
         @Override
         public boolean equals(Object obj) {
 
-            // Reflexive
             if (this == obj)
                 return true;
 
-            // Null check
             if (obj == null)
                 return false;
 
-            // Type check
             if (getClass() != obj.getClass())
                 return false;
 
             Feet other = (Feet) obj;
 
-            // Floating point comparison
             return Double.compare(this.value, other.value) == 0;
         }
 
@@ -43,5 +35,16 @@ public class FeetMeasurement {
         public int hashCode() {
             return Double.hashCode(value);
         }
+    }
+
+    public static void main(String[] args) {
+
+        Feet f1 = new Feet(1.0);
+        Feet f2 = new Feet(1.0);
+
+        boolean result = f1.equals(f2);
+
+        System.out.println("Input: 1.0 ft and 1.0 ft");
+        System.out.println("Output: Equal (" + result + ")");
     }
 }
