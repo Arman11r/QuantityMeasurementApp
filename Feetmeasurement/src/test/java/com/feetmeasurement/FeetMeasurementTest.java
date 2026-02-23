@@ -3,65 +3,84 @@ package com.feetmeasurement;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class FeetMeasurementTest {
+class FeatMeasurementTest {
 
     @Test
     void testFeetEquality_SameValue() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+        FeatMeasurement.Length l1 =
+                new FeatMeasurement.Length(1.0,
+                        FeatMeasurement.Length.LengthUnit.FEET);
 
-        FeetMeasurement.Quantity q2 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+        FeatMeasurement.Length l2 =
+                new FeatMeasurement.Length(1.0,
+                        FeatMeasurement.Length.LengthUnit.FEET);
 
-        assertTrue(q1.equals(q2));
+        assertTrue(l1.equals(l2));
     }
 
     @Test
-    void testInchEquality_SameValue() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(5.0, FeetMeasurement.Unit.INCH);
+    void testInchesEquality_SameValue() {
+        FeatMeasurement.Length l1 =
+                new FeatMeasurement.Length(5.0,
+                        FeatMeasurement.Length.LengthUnit.INCHES);
 
-        FeetMeasurement.Quantity q2 =
-                new FeetMeasurement.Quantity(5.0, FeetMeasurement.Unit.INCH);
+        FeatMeasurement.Length l2 =
+                new FeatMeasurement.Length(5.0,
+                        FeatMeasurement.Length.LengthUnit.INCHES);
 
-        assertTrue(q1.equals(q2));
+        assertTrue(l1.equals(l2));
     }
 
     @Test
-    void testFeetToInchEquality() {
-        FeetMeasurement.Quantity oneFoot =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+    void testFeetToInchesEquality() {
+        FeatMeasurement.Length oneFoot =
+                new FeatMeasurement.Length(1.0,
+                        FeatMeasurement.Length.LengthUnit.FEET);
 
-        FeetMeasurement.Quantity twelveInch =
-                new FeetMeasurement.Quantity(12.0, FeetMeasurement.Unit.INCH);
+        FeatMeasurement.Length twelveInches =
+                new FeatMeasurement.Length(12.0,
+                        FeatMeasurement.Length.LengthUnit.INCHES);
 
-        assertTrue(oneFoot.equals(twelveInch));
+        assertTrue(oneFoot.equals(twelveInches));
     }
 
     @Test
     void testDifferentValues() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+        FeatMeasurement.Length l1 =
+                new FeatMeasurement.Length(1.0,
+                        FeatMeasurement.Length.LengthUnit.FEET);
 
-        FeetMeasurement.Quantity q2 =
-                new FeetMeasurement.Quantity(2.0, FeetMeasurement.Unit.FEET);
+        FeatMeasurement.Length l2 =
+                new FeatMeasurement.Length(2.0,
+                        FeatMeasurement.Length.LengthUnit.FEET);
 
-        assertFalse(q1.equals(q2));
+        assertFalse(l1.equals(l2));
     }
 
     @Test
     void testNullComparison() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+        FeatMeasurement.Length l1 =
+                new FeatMeasurement.Length(1.0,
+                        FeatMeasurement.Length.LengthUnit.FEET);
 
-        assertFalse(q1.equals(null));
+        assertFalse(l1.equals(null));
     }
 
     @Test
-    void testDifferentType() {
-        FeetMeasurement.Quantity q1 =
-                new FeetMeasurement.Quantity(1.0, FeetMeasurement.Unit.FEET);
+    void testDifferentTypeComparison() {
+        FeatMeasurement.Length l1 =
+                new FeatMeasurement.Length(1.0,
+                        FeatMeasurement.Length.LengthUnit.FEET);
 
-        assertFalse(q1.equals("1.0"));
+        assertFalse(l1.equals("1.0"));
+    }
+
+    @Test
+    void testReflexiveProperty() {
+        FeatMeasurement.Length l1 =
+                new FeatMeasurement.Length(3.0,
+                        FeatMeasurement.Length.LengthUnit.FEET);
+
+        assertTrue(l1.equals(l1));
     }
 }
