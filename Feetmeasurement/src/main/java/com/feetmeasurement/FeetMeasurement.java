@@ -1,55 +1,86 @@
 package com.feetmeasurement;
 
-public class FeetMeasurement {
+public class FeatMeasurement {
 
-   
-    public enum Unit {
+    public static class Length {
 
-        FEET(12.0),
-        INCH(1.0);
+        private double value;
+        private LengthUnit unit;
 
-        private final double conversionFactor;
+        public enum LengthUnit {
+            FEET(12.0),
+            INCHES(1.0);
 
-        Unit(double conversionFactor) {
-            this.conversionFactor = conversionFactor;
+            private final double conversionFactor;
+
+            LengthUnit(double conversionFactor) {
+                this.conversionFactor = conversionFactor;
+            }
+
+            public double getConversionFactor() {
+                return conversionFactor;
+            }
         }
 
-        public double toBase(double value) {
-            return value * conversionFactor;
-        }
-    }
-
-   
-    public static class Quantity {
-
-        private final double value;
-        private final Unit unit;
-
-        public Quantity(double value, Unit unit) {
+        public Length(double value, LengthUnit unit) {
             this.value = value;
             this.unit = unit;
         }
 
-        @Override
-        public boolean equals(Object obj) {
+        private double convertToBaseUnit() {
+            return this.value * this.unit.getConversionFactor();
+        }
 
-            if (this == obj)
+        public boolean compare(Length thatLength) {
+            return Double.compare(
+                    this.convertToBaseUnit(),
+                    thatLength.convertToBaseUnit()
+            ) == 0;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o)
                 return true;
 
-            if (obj == null || getClass() != obj.getClass())
+            if (o == null || getClass() != o.getClass())
                 return false;
 
-            Quantity other = (Quantity) obj;
-
-            double thisInBase = this.unit.toBase(this.value);
-            double otherInBase = other.unit.toBase(other.value);
-
-            return Double.compare(thisInBase, otherInBase) == 0;
+            Length that = (Length) o;
+            return compare(that);
         }
 
         @Override
         public int hashCode() {
-            return Double.hashCode(unit.toBase(value));
+            return Double.hashCode(convertToBaseUnit());
         }
+    }
+
+    public static boolean demonstrateLengthEquality(Length l1, Length l2) {
+        return l1.equals(l2);
+    }
+
+    public static void demonstrateFeetEquality() {
+        Length l1 = new Length(1.0, Length.LengthUnit.FEET);
+        Length l2 = new Length(1.0, Length.LengthUnit.FEET);
+        System.out.println("Feet equal? " + l1.equals(l2));
+    }
+
+    public static void demonstrateInchesEquality() {
+        Length l1 = new Length(1.0, Length.LengthUnit.INCHES);
+        Length l2 = new Length(1.0, Length.LengthUnit.INCHES);
+        System.out.println("Inches equal? " + l1.equals(l2));
+    }
+
+    public static void demonstrateFeetInchesComparison() {
+        Length l1 = new Length(1.0, Length.LengthUnit.FEET);
+        Length l2 = new Length(12.0, Length.LengthUnit.INCHES);
+        System.out.println("Feet & Inches equal? " + l1.equals(l2));
+    }
+
+    public static void main(String[] args) {
+        demonstrateFeetEquality();
+        demonstrateInchesEquality();
+        demonstrateFeetInchesComparison();
     }
 }
