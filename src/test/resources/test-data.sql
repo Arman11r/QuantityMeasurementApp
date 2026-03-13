@@ -1,0 +1,35 @@
+INSERT INTO quantity_measurement_entity (
+    this_value,
+    this_unit,
+    this_measurement_type,
+    that_value,
+    that_unit,
+    that_measurement_type,
+    operation,
+    result_value,
+    result_unit,
+    result_measurement_type,
+    result_string,
+    is_error,
+    error_message,
+    created_at,
+    updated_at
+)
+VALUES
+(
+    1.0,
+    'FEET',
+    'LengthUnit',
+    12.0,
+    'INCHES',
+    'LengthUnit',
+    'COMPARE',
+    1.0,
+    'BOOLEAN',
+    'None',
+    'true',
+    false,
+    null,
+    NOW(),
+    NOW()
+);
