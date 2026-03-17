@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
                         ex.getMessage(), request.getRequestURI()));
     }
 
-    // ── Catch-all for any other exception ─────────────────────────────────────
+    // ── Catch-all for any other exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGlobalException(
             Exception ex,
@@ -59,7 +59,7 @@ public class GlobalExceptionHandler {
                         ex.getMessage(), request.getRequestURI()));
     }
 
-    // ── Helper ────────────────────────────────────────────────────────────────
+    // ── Helper
     private Map<String, Object> buildErrorBody(
             HttpStatus status, String error, String message, String path) {
         Map<String, Object> body = new HashMap<>();
