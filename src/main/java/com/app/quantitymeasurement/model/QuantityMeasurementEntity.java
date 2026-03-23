@@ -52,7 +52,6 @@ public class QuantityMeasurementEntity {
 
     private LocalDateTime updatedAt;
 
-    // Constructor matching your existing UC16 usage in ServiceImpl
     public QuantityMeasurementEntity(
             double thisValue,
             String thisUnit,

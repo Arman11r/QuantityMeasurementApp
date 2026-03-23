@@ -16,7 +16,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
     @Autowired
     private QuantityMeasurementRepository repository;
 
-    // -------------------- COMPARE --------------------
+    //COMPARE
     @Override
     public QuantityMeasurementDTO compare(QuantityDTO q1Dto, QuantityDTO q2Dto) {
 
@@ -47,7 +47,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
         }
     }
 
-    // -------------------- CONVERT --------------------
+    //CONVERT
     @Override
     public QuantityMeasurementDTO convert(QuantityDTO source, QuantityDTO target) {
 
@@ -79,19 +79,19 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
         }
     }
 
-    // -------------------- ADD --------------------
+    //ADD
     @Override
     public QuantityMeasurementDTO add(QuantityDTO q1Dto, QuantityDTO q2Dto) {
         return calculate(q1Dto, q2Dto, "add");
     }
 
-    // -------------------- SUBTRACT --------------------
+    //SUBTRACT
     @Override
     public QuantityMeasurementDTO subtract(QuantityDTO q1Dto, QuantityDTO q2Dto) {
         return calculate(q1Dto, q2Dto, "subtract");
     }
 
-    // -------------------- DIVIDE --------------------
+    //DIVIDE
     @Override
     public QuantityMeasurementDTO divide(QuantityDTO q1Dto, QuantityDTO q2Dto) {
 
@@ -121,7 +121,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
         }
     }
 
-    // -------------------- COMMON CALCULATION --------------------
+    //COMMON CALC
     private QuantityMeasurementDTO calculate(QuantityDTO q1Dto, QuantityDTO q2Dto, String operation) {
 
         if (q1Dto == null || q2Dto == null) {
@@ -158,7 +158,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
         }
     }
 
-    // -------------------- HISTORY --------------------
+    //HISTORY
     @Override
     public List<QuantityMeasurementDTO> getHistoryByOperation(String operation) {
         return QuantityMeasurementDTO.fromEntityList(repository.findByOperation(operation.toLowerCase()));
@@ -179,7 +179,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
         return QuantityMeasurementDTO.fromEntityList(repository.findByIsErrorTrue());
     }
 
-    // -------------------- HELPER METHODS --------------------
+    //HELPER METHODS
     private Quantity<IMeasurable> createQuantity(QuantityDTO dto) {
         IMeasurable unit = getUnit(dto.getUnit(), dto.getMeasurementType());
         return new Quantity<>(dto.getValue(), unit);
