@@ -6,7 +6,9 @@ import com.app.quantitymeasurement.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import java.util.Optional;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -50,15 +52,24 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserEntity user) {
+    public ResponseEntity<?> login(@RequestBody UserEntity user) {
 
-        UserEntity dbUser = userRepository.findByUsername(user.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        Optional<UserEntity> existingUser = userRepository.findByUsername(user.getUsername());
 
-        if (!passwordEncoder.matches(user.getPassword(), dbUser.getPassword())) {
-            throw new RuntimeException("Invalid password");
+        if (!existingUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid username");
         }
 
-        return jwtService.generateToken(user.getUsername());
+        UserEntity dbUser = existingUser.get();
+
+        if (!passwordEncoder.matches(user.getPassword(), dbUser.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid password");
+        }
+
+        String token = jwtService.generateToken(user.getUsername());
+
+        return ResponseEntity.ok(token);
     }
 }
