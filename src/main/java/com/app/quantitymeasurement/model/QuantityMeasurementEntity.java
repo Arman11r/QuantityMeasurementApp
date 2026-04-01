@@ -52,6 +52,9 @@ public class QuantityMeasurementEntity {
 
     private LocalDateTime updatedAt;
 
+    @Column(nullable = true)  // nullable so old records don't break
+    private String username;
+
     public QuantityMeasurementEntity(
             double thisValue,
             String thisUnit,

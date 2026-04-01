@@ -16,16 +16,17 @@ public class SecurityConfig {
     private JwtFilter jwtFilter;
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
-        configuration.setAllowedOrigins(List.of("https://quantity-measurement-app-frontend-fawn.vercel.app"));
+        // Both origins in ONE list — two setAllowedOrigins calls overwrites the first
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:3000",
+                "https://quantity-measurement-app-frontend-fawn.vercel.app"
+        ));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-
         return source;
     }
     @Bean
@@ -41,14 +42,15 @@ public class SecurityConfig {
                 .cors(cors -> {})
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/v1/quantities/history/**").authenticated()
                         .requestMatchers("/api/v1/quantities/**").permitAll()
                         .requestMatchers(
-                                "/",                          // home
-                                "/auth/**",                   // login/register
-                                "/swagger-ui/**",             // swagger UI
-                                "/v3/api-docs/**",            // swagger docs
-                                "/oauth2/**",                 // OAuth2 start
-                                "/login/oauth2/code/**"       // OAuth2 callback
+                                "/",
+                                "/auth/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/oauth2/**",
+                                "/login/oauth2/code/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

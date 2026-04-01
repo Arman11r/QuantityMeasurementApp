@@ -30,14 +30,15 @@ public class AuthController {
         return "User registered successfully";
     }
     @GetMapping("/oauth-success")
-    public String oauthSuccess(org.springframework.security.core.Authentication authentication) {
+    public void oauthSuccess(org.springframework.security.core.Authentication authentication,
+                             jakarta.servlet.http.HttpServletResponse response) throws java.io.IOException {
 
         org.springframework.security.oauth2.core.user.OAuth2User oauthUser =
                 (org.springframework.security.oauth2.core.user.OAuth2User) authentication.getPrincipal();
 
         String email = oauthUser.getAttribute("email");
 
-        UserEntity user = userRepository.findByUsername(email)
+        userRepository.findByUsername(email)
                 .orElseGet(() -> {
                     UserEntity newUser = new UserEntity();
                     newUser.setUsername(email);
@@ -45,10 +46,12 @@ public class AuthController {
                     return userRepository.save(newUser);
                 });
 
-
         String token = jwtService.generateToken(email);
 
-        return token;
+        // Redirect to frontend with token as query param
+        response.sendRedirect(
+                "https://quantity-measurement-app-frontend-fawn.vercel.app/oauth-success?token=" + token
+        );
     }
 
     @PostMapping("/login")

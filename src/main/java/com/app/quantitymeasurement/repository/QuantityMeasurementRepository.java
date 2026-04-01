@@ -16,7 +16,7 @@ public interface QuantityMeasurementRepository extends JpaRepository<QuantityMea
 
     List<QuantityMeasurementEntity> findByThisMeasurementType(String measurementType);
 
-
+    List<QuantityMeasurementEntity> findByUsername(String username);
     List<QuantityMeasurementEntity> findByIsErrorTrue();
 
 
