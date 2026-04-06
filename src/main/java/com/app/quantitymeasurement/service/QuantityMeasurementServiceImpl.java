@@ -32,7 +32,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
                     String.valueOf(result), false, null
             );
             entity.setUsername(username); // ← SET USERNAME
-            repository.save(entity);
+            if (username != null) repository.save(entity); // only save when logged in
             return QuantityMeasurementDTO.fromEntity(entity);
         } catch (Exception e) {
             throw new QuantityMeasurementException("Compare failed: " + e.getMessage());
@@ -58,7 +58,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
                     null, false, null
             );
             entity.setUsername(username); // ← SET USERNAME
-            repository.save(entity);
+            if (username != null) repository.save(entity); // only save when logged in
             return QuantityMeasurementDTO.fromEntity(entity);
         } catch (Exception e) {
             throw new QuantityMeasurementException("Convert failed: " + e.getMessage());
@@ -91,7 +91,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
                     null, false, null
             );
             entity.setUsername(username); // ← SET USERNAME
-            repository.save(entity);
+            if (username != null) repository.save(entity); // only save when logged in
             return QuantityMeasurementDTO.fromEntity(entity);
         } catch (Exception e) {
             throw new QuantityMeasurementException("Divide failed: " + e.getMessage());
@@ -117,7 +117,7 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
                     null, false, null
             );
             entity.setUsername(username); // ← SET USERNAME
-            repository.save(entity);
+            if (username != null) repository.save(entity); // only save when logged in
             return QuantityMeasurementDTO.fromEntity(entity);
         } catch (Exception e) {
             throw new QuantityMeasurementException(operation + " failed: " + e.getMessage());
