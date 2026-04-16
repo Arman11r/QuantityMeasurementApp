@@ -1,0 +1,4 @@
+user-service/src/main/resources/application.properties
+measurement-service/src/main/resources/application.properties
+.idea/
+.DS_Store
